@@ -28,7 +28,7 @@ public class ModifierFournisseurServlet extends HttpServlet {
 
         req.setAttribute("fournisseur", fournisseur);
         req.setAttribute("produits", produits);
-        req.getRequestDispatcher("/WEB-INF/views/modifierFournisseur.jsp").forward(req, resp);
+        req.getRequestDispatcher("modifierFournisseurs.jsp").forward(req, resp);
     }
 
     @Override

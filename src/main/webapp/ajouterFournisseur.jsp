@@ -39,22 +39,22 @@
     <form name="fournisseurForm" method="post" action="ajouterFournisseur" onsubmit="return validateForm()">
         <div class="mb-3">
             <label for="nom" class="form-label">Nom :</label>
-            <input type="text" id="nom" name="nom" class="form-control" required />
+            <input type="text" id="nom" name="nom" class="form-control" required/>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email :</label>
-            <input type="email" id="email" name="email" class="form-control" required />
+            <input type="email" id="email" name="email" class="form-control" required/>
         </div>
         <div class="mb-3">
             <label for="telephone" class="form-label">Téléphone :</label>
-            <input type="text" id="telephone" name="telephone" class="form-control" required />
+            <input type="text" id="telephone" name="telephone" class="form-control" required/>
         </div>
         <div class="mb-3">
             <label for="produitId" class="form-label">Produit associé :</label>
             <select id="produitId" name="produitId" class="form-select" required>
                 <option value="">-- Choisir un produit --</option>
                 <c:forEach var="p" items="${produits}">
-                    <option value="${p.id}">${p.nom} (${p.prix} €)</option>
+                    <option value="${p.id}">${p.nom} (${p.prix} DH)</option>
                 </c:forEach>
             </select>
         </div>

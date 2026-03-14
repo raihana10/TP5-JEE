@@ -2,6 +2,8 @@ package com.tp5jee.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 //Entity : definir la classe Produit comme une entite JPA(represente une table)
 @Entity @Table(name = "produit")
 public class Produit {
@@ -23,6 +25,8 @@ public class Produit {
     @OneToOne(mappedBy = "produit", cascade = CascadeType.ALL)
     private Fournisseur fournisseur;
 
+    @ManyToMany(mappedBy = "produits")
+    private List<Commande> commandes;
 
     //constructeurs
     public Produit(){}
@@ -39,6 +43,9 @@ public class Produit {
     public Double getPrix(){ return prix; }
     public Category getCategory() { return category; }
     public Fournisseur getFournisseur() { return fournisseur; }
+    public List<Commande> getCommandes() {
+        return commandes;
+    }
 
     //setters
     public void setId(int id){this.id=id;}
@@ -46,7 +53,9 @@ public class Produit {
     public void setPrix(Double prix){this.prix=prix;}
     public void setCategory(Category category){this.category=category;}
     public void setFournisseur(Fournisseur fournisseur) { this.fournisseur = fournisseur; }
-
+    public void setCommandes(List<Commande> commandes) {
+        this.commandes = commandes;
+    }
 
 }
 

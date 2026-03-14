@@ -1,7 +1,7 @@
 package com.tp5jee.servlets;
 
-import com.tp5jee.dao.FournisseurDAO;
-import com.tp5jee.models.Fournisseur;
+import com.tp5jee.dao.CommandeDAO;
+import com.tp5jee.models.Commande;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,18 +11,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/listerFournisseurs")
-public class ListerFournisseursServlet extends HttpServlet {
+@WebServlet("/listerCommandes")
+public class ListerCommandesServlet extends HttpServlet {
 
-    private FournisseurDAO fournisseurDAO = new FournisseurDAO();
+    private CommandeDAO commandeDAO = new CommandeDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
-        List<Fournisseur> fournisseurs = fournisseurDAO.getAll();
-
-        req.setAttribute("fournisseurs", fournisseurs);
-        req.getRequestDispatcher("listerFournisseurs.jsp").forward(req, resp);
+        List<Commande> commandes = commandeDAO.findAll();
+        req.setAttribute("commandes", commandes);
+        req.getRequestDispatcher("listerCommandes.jsp").forward(req, resp);
     }
 }

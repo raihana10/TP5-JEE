@@ -6,18 +6,40 @@ import com.tp5jee.models.Fournisseur;
 import com.tp5jee.models.Produit;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-@WebServlet("/AjouterFournisseurServlet")
-public class AjouterFournisseurServlet {
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws
-            ServletException, IOException {
-        // Passer la liste des produits pour le select
+@WebServlet("/ajouterFournisseur")
+public class AjouterFournisseurServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
         ProduitDAO produitDAO = new ProduitDAO();
-        req.setAttribute("produits", produitDAO.getProduits());
+
+        // Récupérer TOUS les produits
+        List<Produit> tousLesProduits = produitDAO.getProduits();
+
+        // Filtrer pour ne garder que ceux sans fournisseur
+        List<Produit> produitsSansFournisseur = new ArrayList<>();
+        for (Produit p : tousLesProduits) {
+            if (p.getFournisseur() == null) {
+                produitsSansFournisseur.add(p);
+            }
+        }
+
+        // Passer la liste filtrée à la JSP
+        req.setAttribute("produits", produitsSansFournisseur);
+
+        // Aussi, passer le nombre total pour information (optionnel)
+        req.setAttribute("totalProduits", tousLesProduits.size());
+        req.setAttribute("produitsFiltres", produitsSansFournisseur.size());
+
         req.getRequestDispatcher("ajouterFournisseur.jsp").forward(req, resp);
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws
@@ -37,6 +59,6 @@ public class AjouterFournisseurServlet {
         produit.setFournisseur(fournisseur);
         FournisseurDAO dao = new FournisseurDAO();
         dao.saveOrUpdate(fournisseur);
-        resp.sendRedirect("listerFournisseurs.jsp");
+        resp.sendRedirect("listerFournisseurs");
     }
 }

@@ -1,5 +1,7 @@
 package com.tp5jee.util;
 
+import com.tp5jee.models.Client;
+import com.tp5jee.models.Commande;
 import com.tp5jee.models.Fournisseur;
 import com.tp5jee.models.Produit;
 import org.hibernate.*;
@@ -15,6 +17,8 @@ public class HibernateUtil {
                         .configure("hibernate.cfg.xml")
                         .addAnnotatedClass(Produit.class)
                         .addAnnotatedClass(Fournisseur.class)
+                        .addAnnotatedClass(Commande.class)
+                        .addAnnotatedClass(Client.class)
                         .buildSessionFactory();
         } catch (Exception e) {
                 e.printStackTrace();
