@@ -24,6 +24,7 @@
             <th>Nom</th>
             <th>Prix</th>
             <th>Categorie</th>
+            <th>Fournisseur</th>
             <th>Supprimer</th>
             <th>Modifier</th>
         </tr>
@@ -35,6 +36,14 @@
                     <td>${p.nom}</td>
                     <td>${p.prix}</td>
                     <td>${p.category}</td>
+                    <td>
+                        <c:if test="${not empty p.fournisseur}">
+                            ${p.fournisseur.nom}
+                        </c:if>
+                        <c:if test="${empty p.fournisseur}">
+                            Aucun
+                        </c:if>
+                    </td>
                     <td>
                         <form action="DeleteProduit" method="POST" class="d-inline;">
                             <input type="hidden" name="id" value="${p.id}">

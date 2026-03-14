@@ -20,6 +20,10 @@ public class Produit {
     @Enumerated(EnumType.STRING)//stocker l'enum sous forme de chaine
     private Category category;
 
+    @OneToOne(mappedBy = "produit", cascade = CascadeType.ALL)
+    private Fournisseur fournisseur;
+
+
     //constructeurs
     public Produit(){}
     public Produit(String nom , Double prix , Category category){
@@ -28,15 +32,21 @@ public class Produit {
         this.category=category;
     }
 
+
     //getters
     public int getId(){ return id; }
     public String getNom(){ return nom; }
     public Double getPrix(){ return prix; }
     public Category getCategory() { return category; }
+    public Fournisseur getFournisseur() { return fournisseur; }
 
     //setters
     public void setId(int id){this.id=id;}
     public void setNom(String nom){this.nom=nom;}
     public void setPrix(Double prix){this.prix=prix;}
     public void setCategory(Category category){this.category=category;}
+    public void setFournisseur(Fournisseur fournisseur) { this.fournisseur = fournisseur; }
+
+
 }
+
